@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment6"
         mc:Ignorable="d"
-        Title="To Do Reminder" Height="350" Width="525">
+        Title="To Do Reminder" Height="432" Width="674" MinWidth="674" MinHeight="432">
     <Grid>
         <Menu Height="20" VerticalAlignment="Top" Width="auto">
             <MenuItem Header="_File">
@@ -19,14 +19,19 @@
                 <MenuItem Header="Om..."/>
             </MenuItem>
         </Menu>
-        <Label x:Name="lblDateTime" Content="Date and Time" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="dtpDateTimePicker" HorizontalAlignment="Left" Margin="118,20,0,0" VerticalAlignment="Top" Width="181"/>
-        <Label x:Name="lblPriority" Content="Priority" HorizontalAlignment="Left" Margin="319,20,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="lstPriority" HorizontalAlignment="Left" Margin="387,20,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblDateTime" Content="Date" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dtpDateTimePicker" HorizontalAlignment="Left" Margin="55,22,0,0" VerticalAlignment="Top" Width="182"/>
+        <Label x:Name="lblPriority" Content="Priority" HorizontalAlignment="Left" Margin="333,25,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cBoxPriority" HorizontalAlignment="Left" Margin="397,25,0,0" VerticalAlignment="Top" Width="166"/>
         <Label x:Name="lblToDo" Content="To do" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtTodo" HorizontalAlignment="Left" Height="23" Margin="55,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="452"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="55,79,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnChange" Content="Change" HorizontalAlignment="Left" Margin="135,79,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.024,0.507"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="215,79,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.321,0.386"/>
+        <TextBox x:Name="txtTodo" HorizontalAlignment="Left" Height="23" Margin="55,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="508"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="581,52,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
+        <Button x:Name="btnChange" Content="Change" HorizontalAlignment="Left" Margin="581,26,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.024,0.507" Click="btnChange_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="581,371,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.321,0.386" Click="btnDelete_Click"/>
+        <ListBox x:Name="lstToDo" HorizontalAlignment="Left" Height="227" Margin="10,139,0,0" VerticalAlignment="Top" Width="646" SelectionChanged="lstToDo_SelectionChanged"/>
+        <Label x:Name="lblDateList" Content="Date" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPriorityList" Content="Priority" HorizontalAlignment="Left" Margin="242,78,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTodaysDate" Content="CurrentDate" HorizontalAlignment="Left" Margin="12,366,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
