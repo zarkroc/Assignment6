@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// Date: 2017-12-08
 /// </summary>
 
-namespace Assignment6
+namespace SmallToDoApp
 {
     [Serializable]
     public class Task

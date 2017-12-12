@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /// Author: Tomas Perers
 /// Date: 2017-12-08
 /// </summary>
-namespace Assignment6
+namespace SmallToDoApp
 {
     public enum PriorityLevel
     {

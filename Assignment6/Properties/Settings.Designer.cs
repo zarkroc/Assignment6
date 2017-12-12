@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Assignment6.Properties
+namespace SmallToDoApp.Properties
 {
 
 

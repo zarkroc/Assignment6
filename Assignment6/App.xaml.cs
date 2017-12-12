@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Assignment6
+namespace SmallToDoApp
 {
     /// <summary>
     /// Interaction logic for App.xaml

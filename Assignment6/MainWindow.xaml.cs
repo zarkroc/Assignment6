@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Assignment6
+namespace SmallToDoApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
