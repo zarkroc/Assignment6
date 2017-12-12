@@ -11,11 +11,19 @@ using System.Threading.Tasks;
 
 namespace Assignment6
 {
-    class Task
+    [Serializable]
+    public class Task
     {
         private string description;
         private PriorityLevel priority;
         private DateTime date;
+
+        public Task()
+        {
+            this.description = String.Empty;
+            this.priority = PriorityLevel.Low;
+            this.date = DateTime.Now;
+        }
 
         public Task(string description, PriorityLevel priority, DateTime date)
         {
@@ -30,10 +38,7 @@ namespace Assignment6
 
         public override string ToString()
         {
-            
-            string output = String.Format("{0,10} {1,10} {2}", date, priority, description);
-            
-            return output;
+            return String.Format("{0,-15} {1,-10} {2}", date.ToString("yyyy-MM-dd"), priority, description);
         }
     }
 }

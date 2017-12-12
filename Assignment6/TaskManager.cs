@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +13,8 @@ using System.Threading.Tasks;
 /// </summary>
 namespace Assignment6
 {
-    class TaskManager
+    [Serializable]
+    public class TaskManager
     {
         private List<Task> taskList;
 
@@ -57,5 +61,6 @@ namespace Assignment6
             }
             return returnValue;
         }
+
     }
 }

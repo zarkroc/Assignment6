@@ -9,18 +9,18 @@
     <Grid>
         <Menu Height="20" VerticalAlignment="Top" Width="auto">
             <MenuItem Header="_File">
-                <MenuItem Header="_New Ctrl+N"/>
+                <MenuItem x:Name="menuNew" Header="_New Ctrl+N" Click="MenuItem_New_Click"/>
                 <Separator />
-                <MenuItem Header="_Open datafile"/>
-                <MenuItem Header="_Save datafile"/>
-                <MenuItem Header="_Exit ALT+F4"/>
+                <MenuItem x:Name="menuOpen" Header="_Open datafile" Click="MenuItem_Open_Click"/>
+                <MenuItem x:Name="menuSave" Header="_Save datafile" Click="MenuItem_Save_Click"/>
+                <MenuItem x:Name="menuExit" Header="_Exit ALT+F4" Click="MenuItem_Exit_Click"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="Om..."/>
             </MenuItem>
         </Menu>
         <Label x:Name="lblDateTime" Content="Date" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="dtpDateTimePicker" HorizontalAlignment="Left" Margin="55,22,0,0" VerticalAlignment="Top" Width="182"/>
+        <DatePicker x:Name="dtpDateTimePicker" HorizontalAlignment="Left" Margin="55,22,0,0" VerticalAlignment="Top" Width="182" ToolTip="Click to open calendar to pick a date for the task"/>
         <Label x:Name="lblPriority" Content="Priority" HorizontalAlignment="Left" Margin="333,25,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cBoxPriority" HorizontalAlignment="Left" Margin="397,25,0,0" VerticalAlignment="Top" Width="166"/>
         <Label x:Name="lblToDo" Content="To do" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"/>
@@ -28,10 +28,10 @@
         <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="581,52,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
         <Button x:Name="btnChange" Content="Change" HorizontalAlignment="Left" Margin="581,26,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.024,0.507" Click="btnChange_Click"/>
         <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="581,371,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.321,0.386" Click="btnDelete_Click"/>
-        <ListBox x:Name="lstToDo" HorizontalAlignment="Left" Height="227" Margin="10,139,0,0" VerticalAlignment="Top" Width="646" SelectionChanged="lstToDo_SelectionChanged"/>
+        <ListBox x:Name="lstToDo" HorizontalAlignment="Left" Height="252" Margin="10,114,0,0" VerticalAlignment="Top" Width="646" SelectionChanged="lstToDo_SelectionChanged" FontFamily="Courier New"/>
         <Label x:Name="lblDateList" Content="Date" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblPriorityList" Content="Priority" HorizontalAlignment="Left" Margin="242,78,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTodaysDate" Content="CurrentDate" HorizontalAlignment="Left" Margin="12,366,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPriorityList" Content="Priority" HorizontalAlignment="Left" Margin="129,83,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="333,83,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCurrentTime" Content="CurrentDate" HorizontalAlignment="Left" Margin="12,366,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
