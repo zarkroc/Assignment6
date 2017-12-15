@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /// <summary>
 /// Author: Tomas Perers
@@ -11,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SmallToDoApp
 {
+    /// <summary>
+    /// Representation of a Task.
+    /// </summary>
     [Serializable]
     public class Task
     {
@@ -18,6 +17,9 @@ namespace SmallToDoApp
         private PriorityLevel priority;
         private DateTime date;
 
+        /// <summary>
+        /// Initialize a new task with default values.
+        /// </summary>
         public Task()
         {
             this.description = String.Empty;
@@ -25,6 +27,12 @@ namespace SmallToDoApp
             this.date = DateTime.Now;
         }
 
+        /// <summary>
+        /// Initialize a task with specefied values.
+        /// </summary>
+        /// <param name="description"></param>
+        /// <param name="priority"></param>
+        /// <param name="date"></param>
         public Task(string description, PriorityLevel priority, DateTime date)
         {
             this.Description = description;
@@ -36,6 +44,10 @@ namespace SmallToDoApp
         public string Description { get => description; set => description = value; }
         public PriorityLevel Priority { get => priority; set => priority = value; }
 
+        /// <summary>
+        /// Overrides the ToString and returns a formattaded string.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return String.Format("{0,-15} {1,-10} {2}", date.ToString("yyyy-MM-dd"), priority, description);

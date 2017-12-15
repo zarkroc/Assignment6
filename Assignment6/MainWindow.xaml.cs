@@ -1,24 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml;
-using System.Xml.Serialization;
 
+/// <summary>
+/// Author: Tomas Perers
+/// Date: 2017-12-08
+/// </summary>
 namespace SmallToDoApp
 {
     /// <summary>
@@ -29,19 +17,29 @@ namespace SmallToDoApp
         private TaskManager taskManager;
         private Task task;
         private bool exitProram = false;
+        private FileHandler fileHandler = new FileHandler();
 
+        /// <summary>
+        /// Initialize the window.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             taskManager = new TaskManager();
-
+           
             UpdateGUI();
-            cBoxPriority.Items.Add(PriorityLevel.High);
-            cBoxPriority.Items.Add(PriorityLevel.Medium);
-            cBoxPriority.Items.Add(PriorityLevel.Low);
         }
+
+        /// <summary>
+        /// Resets the GUI to default settings.
+        /// </summary>
         private void InitializeGUI()
         {
+            cBoxPriority.Items.Clear();
+            foreach (PriorityLevel priority in Enum.GetValues(typeof(PriorityLevel)))
+            {
+                cBoxPriority.Items.Add(priority);
+            }
             txtTodo.Text = "";
             lstToDo.Items.Clear();
             cBoxPriority.SelectedIndex = -1;
@@ -49,6 +47,10 @@ namespace SmallToDoApp
             dtpDateTimePicker.DisplayDate = DateTime.Today;
             lblCurrentTime.Content = DateTime.Now.ToString("HH:mm:ss");
         }
+
+        /// <summary>
+        /// Update the GUI with new information from TaskManager.
+        /// </summary>
         private void UpdateGUI()
         {
             InitializeGUI();
@@ -61,14 +63,19 @@ namespace SmallToDoApp
                 }
             }
         }
+
+        /// <summary>
+        /// Action to perform when the change button is clicked.
+        /// Change the task at selected index from the listBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
             int index = lstToDo.SelectedIndex;
             task = new Task();
             if (index >= 0)
             {
-                task.Description = txtTodo.Text;
-                task.Priority = (PriorityLevel)cBoxPriority.SelectedValue;
                 if (!ReadDate())
                     MessageBox.Show("You didn't select a date for the task");
                 else if (!ReadToDo())
@@ -85,6 +92,11 @@ namespace SmallToDoApp
                 MessageBox.Show("Nothing to change, no task selected");
         }
 
+        /// <summary>
+        /// Adds a new task, validates that the input is correct.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             task = new Task();
@@ -102,6 +114,11 @@ namespace SmallToDoApp
             }
         }
 
+        /// <summary>
+        /// Deletes the selected task in the list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = lstToDo.SelectedIndex;
@@ -114,6 +131,11 @@ namespace SmallToDoApp
                 MessageBox.Show("Nothing to delete, no task selected");
         }
 
+        ///// <summary>
+        ///// Updates the GUI with new information when selecting a new item in the listBox.
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
         private void lstToDo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lstToDo.SelectedIndex;
@@ -126,17 +148,25 @@ namespace SmallToDoApp
             }
         }
 
+        /// <summary>
+        /// Reads and validates the Date.
+        /// </summary>
+        /// <returns></returns>
         private bool ReadDate()
         {
-            bool returnValue = false;
             if (dtpDateTimePicker.SelectedDate != null)
             {
                 task.Date = (DateTime)dtpDateTimePicker.SelectedDate;
-                returnValue = true;
+                return true;
             }
-            return returnValue;
+            else
+                return false;
         }
 
+        /// <summary>
+        /// Reads and validates that the ToDo is not empty.
+        /// </summary>
+        /// <returns></returns>
         private bool ReadToDo()
         {
             if (String.IsNullOrEmpty(txtTodo.Text))
@@ -144,6 +174,11 @@ namespace SmallToDoApp
             task.Description = txtTodo.Text;
             return true;
         }
+
+        /// <summary>
+        /// Reads and validates that a priority has been selected.
+        /// </summary>
+        /// <returns></returns>
         private bool ReadPriority()
         {
             if (cBoxPriority.SelectedIndex > -1)
@@ -155,7 +190,10 @@ namespace SmallToDoApp
                 return false;
         }
 
-
+        /// <summary>
+        /// Make sure to ask the user to confirm when closing the program.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnClosing(CancelEventArgs e)
         {
             ExitProgramOrNot();
@@ -164,7 +202,9 @@ namespace SmallToDoApp
             else
                 e.Cancel = true;
         }
-
+        /// <summary>
+        /// ´Handle asking the user wheter or not to exit the program.
+        /// </summary>
         private void ExitProgramOrNot()
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("Do you want to exit program?",
@@ -182,17 +222,33 @@ namespace SmallToDoApp
             }
         }
 
-
+        /// <summary>
+        /// Close the application when picking the exit option in the menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Reset all the GUI. And taskManager.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_New_Click(object sender, RoutedEventArgs e)
         {
+            taskManager = new TaskManager();
             InitializeGUI();
+            UpdateGUI();
         }
 
+        /// <summary>
+        /// Read saved TaskManager from a file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Open_Click(object sender, RoutedEventArgs e)
         {
             // Create OpenFileDialog 
@@ -206,10 +262,16 @@ namespace SmallToDoApp
             {
                 // Open document 
                 string filename = dlg.FileName;
-                LoadFile(filename);
-            }
+                taskManager = fileHandler.LoadFile(filename, taskManager);
+                UpdateGUI();
+             }
         }
 
+        /// <summary>
+        /// Stores the current taskManager to a file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Save_Click(object sender, RoutedEventArgs e)
         {
             // Create OpenFileDialog 
@@ -223,32 +285,10 @@ namespace SmallToDoApp
             {
                 // Open document 
                 string filename = dlg.FileName;
-                SaveFile(filename);
+                fileHandler.SaveFile(filename, taskManager);
             }
         }
 
-
-        public void SaveFile(string filePath)
-        {
-
-            using (Stream stream = File.Open(filePath, FileMode.Create))
-            {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                binaryFormatter.Serialize(stream, taskManager);
-            }
-        }
-
-
-        public void LoadFile(string filePath)
-        {
-            using (Stream stream = File.Open(filePath, FileMode.Open))
-            {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                taskManager = (TaskManager) binaryFormatter.Deserialize(stream);
-                UpdateGUI();
-            }
-
-        }
 
     }
 }
