@@ -16,7 +16,7 @@
                 <MenuItem x:Name="menuExit" Header="_Exit ALT+F4" Click="MenuItem_Exit_Click"/>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="Om..."/>
+                <MenuItem Header="Om..." Click="MenuItem_About_Click"/>
             </MenuItem>
         </Menu>
         <Label x:Name="lblDateTime" Content="Date" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Reflection;
 
 /// <summary>
 /// Author: Tomas Perers
@@ -265,6 +266,17 @@ namespace SmallToDoApp
                 taskManager = fileHandler.LoadFile(filename, taskManager);
                 UpdateGUI();
              }
+        }
+
+        /// <summary>
+        /// Show the about box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_About_Click(object sender, RoutedEventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.Show();
         }
 
         /// <summary>
