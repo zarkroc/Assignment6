@@ -59,9 +59,11 @@ namespace SmallToDoApp
         /// <returns>Task</returns>
         public Task GetTaskAtPosition(int index)
         {
+            
             if (ValidateIndex(index))
             {
-                return taskList[index];
+                Task tmpTask = new Task(taskList[index]);
+                return tmpTask;
             }
             else
                 return null;

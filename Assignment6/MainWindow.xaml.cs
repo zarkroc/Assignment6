@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Threading;
 using System.Reflection;
+using System.Windows.Threading;
 
 /// <summary>
 /// Author: Tomas Perers
@@ -27,7 +29,10 @@ namespace SmallToDoApp
         {
             InitializeComponent();
             taskManager = new TaskManager();
-           
+            DispatcherTimer dispatcher = new DispatcherTimer();
+            dispatcher.Tick += DispatcherSeconds_Tick;
+            dispatcher.Interval = TimeSpan.FromSeconds(1);
+            dispatcher.Start();
             UpdateGUI();
         }
 
@@ -62,6 +67,17 @@ namespace SmallToDoApp
                     lstToDo.Items.Add(taskManager.GetTaskAtPosition(i).ToString());
 
                 }
+            }
+            // Make sure that the buttons are only active if something is selected.
+            if (lstToDo.SelectedIndex > -1)
+            {
+                btnChange.IsEnabled = true;
+                btnDelete.IsEnabled = true;
+            }
+            else
+            {
+                btnChange.IsEnabled = false;
+                btnDelete.IsEnabled = false;
             }
         }
 
@@ -122,14 +138,18 @@ namespace SmallToDoApp
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int index = lstToDo.SelectedIndex;
-            if (index >= 0)
+            var result = MessageBox.Show("Are you sure you want to delete this task?", "Confirm", MessageBoxButton.YesNo);
+            if (result.ToString().ToLower() == "yes")
             {
-                taskManager.RemoveTask(index);
-                UpdateGUI();
+                int index = lstToDo.SelectedIndex;
+                if (index >= 0)
+                {
+                    taskManager.RemoveTask(index);
+                    UpdateGUI();
+                }
+                else
+                    MessageBox.Show("Nothing to delete, no task selected");
             }
-            else
-                MessageBox.Show("Nothing to delete, no task selected");
         }
 
         ///// <summary>
@@ -146,6 +166,8 @@ namespace SmallToDoApp
                 txtTodo.Text = temporaryTask.Description;
                 cBoxPriority.SelectedItem = (PriorityLevel)temporaryTask.Priority;
                 dtpDateTimePicker.SelectedDate = temporaryTask.Date;
+                btnChange.IsEnabled = true;
+                btnDelete.IsEnabled = true;
             }
         }
 
@@ -276,7 +298,7 @@ namespace SmallToDoApp
         private void MenuItem_About_Click(object sender, RoutedEventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
-            aboutBox.Show();
+            aboutBox.ShowDialog();
         }
 
         /// <summary>
@@ -300,7 +322,19 @@ namespace SmallToDoApp
                 fileHandler.SaveFile(filename, taskManager);
             }
         }
+        /// <summary>
+        /// Update the time live.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DispatcherSeconds_Tick(object sender, EventArgs e)
+        {
+            lblCurrentTime.Content = DateTime.Now.ToLongTimeString();
+        }
 
+        private void CommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
 
+        }
     }
 }

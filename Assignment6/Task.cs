@@ -40,6 +40,13 @@ namespace SmallToDoApp
             this.Date = date;
         }
 
+        public Task(Task otherTask)
+        {
+            this.description = otherTask.description;
+            this.priority = otherTask.priority;
+            this.date = otherTask.date;
+        }
+
         public DateTime Date { get => date; set => date = value; }
         public string Description { get => description; set => description = value; }
         public PriorityLevel Priority { get => priority; set => priority = value; }
