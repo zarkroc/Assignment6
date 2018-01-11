@@ -45,7 +45,7 @@ namespace SmallToDoApp
         {
             if (ValidateIndex(index))
             {
-                taskList.Remove(GetTaskAtPosition(index));
+                taskList.RemoveAt(index);
                 return true;
             }
             else
